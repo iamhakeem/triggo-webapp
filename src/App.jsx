@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Email from "./pages/SignUp/Email";
+import Email from "./pages/SignUp/email/Email";
 import Verify from "./pages/SignUp/Verify";
 import Name from "./pages/SignUp/Name";
 import Address from "./pages/SignUp/Address";
@@ -17,17 +17,17 @@ function App() {
       <>
         <Router>
           <Routes>
-            <Route path='/' element={<Email />} />
-            <Route path='/login' element={<LogEmail />} />
-            <Route path='/verify' element={<Verify />} />
-            <Route path='/name' element={<Name />} />
-            <Route path='/address' element={<Address />} />
-            <Route path='/tag' element={<Tag />} />
-            <Route path='/bvn' element={<Bvn />} />
-            <Route path='/password' element={<Password />} />
-            <Route path='/accCreate' element={<AccCreate />} />
-            <Route path='/reset' element={<Reset />} />
-            <Route path='/preset' element={<Preset />} />
+            <Route path="/" element={<Email />} />
+            <Route path="/login" element={<LogEmail />} />
+            <Route path="/verify" element={<Verify />} />
+            <Route path="/name" element={<Name />} />
+            <Route path="/address" element={<Address />} />
+            <Route path="/tag" element={<Tag />} />
+            <Route path="/bvn" element={<Bvn />} />
+            <Route path="/password" element={<Password />} />
+            <Route path="/accCreate" element={<AccCreate />} />
+            <Route path="/reset" element={<Reset />} />
+            <Route path="/preset" element={<Preset />} />
           </Routes>
         </Router>
       </>
