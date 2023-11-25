@@ -54,7 +54,7 @@ function Email() {
         JSON.stringify({ email }),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true,
+          withCredentials: false,
         }
       );
 
