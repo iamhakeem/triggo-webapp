@@ -10,6 +10,8 @@ import AccCreate from "./pages/SignUp/AccCreate";
 import LogEmail from "./pages/LogIn/LogEmail";
 import Reset from "./pages/LogIn/Reset";
 import Preset from "./pages/LogIn/Preset";
+import Dashboard from "./pages/Dashboard/dashboard";
+import Settings from "./pages/Dashboard/Settings";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
             <Route path="/accCreate" element={<AccCreate />} />
             <Route path="/reset" element={<Reset />} />
             <Route path="/preset" element={<Preset />} />
+               <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/settings' element={<Settings />} />
           </Routes>
         </Router>
       </>
