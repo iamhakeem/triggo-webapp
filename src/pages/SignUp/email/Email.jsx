@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import "./email.css";
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import axios from "../../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -13,6 +14,7 @@ const REGISTER_URL = "/api/user/signup";
 function Email() {
   const emailRef = useRef();
   const errRef = useRef();
+  const navigate = useNavigate();
 
   //the email
   const [email, setEmail] = useState("");
@@ -21,6 +23,8 @@ function Email() {
   //check if the email field is focused
   const [emailFocus, setEmailFocus] = useState(false);
   const [errMessage, setErrMessage] = useState("mmm");
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSucessMessage] = useState("");
 
   //focus on the email field when page loads
   useEffect(() => {
@@ -49,6 +53,7 @@ function Email() {
     }
 
     try {
+      setLoading(true);
       const response = await axios.post(
         REGISTER_URL,
         JSON.stringify({ email }),
@@ -58,22 +63,30 @@ function Email() {
         }
       );
 
-      if (response.ok) console.log(response);
+      setLoading(false);
+      setEmail("");
+
+      if (response.ok) {
+        navigate("/verify");
+        setSucessMessage(
+          "An OTP has been sent to your email, Copy and paste the 6 digits number below"
+        );
+      }
+
       console.log(response?.data);
       console.log(response?.accessToken);
       console.log(JSON.stringify(response));
     } catch (error) {
       if (!error?.response) {
         setErrMessage("No Server Response");
-        console.log("No server response");
       } else if (error.response?.status === 409) {
         setErrMessage("Email Taken");
-        console.log("Email Taken");
       } else {
         setErrMessage("Registration Failed");
-        console.log("Registration Failed");
       }
       errRef.current.focus();
+      setLoading(false);
+      setEmail("");
     }
   };
 
@@ -145,6 +158,9 @@ function Email() {
       >
         Next
       </button>
+
+      {loading && <h1>Loadingggggg</h1>}
+      <h1>{successMessage}</h1>
     </div>
   );
 }
