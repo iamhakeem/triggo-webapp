@@ -5,7 +5,7 @@ import Name from "./pages/SignUp/Name";
 import Address from "./pages/SignUp/Address";
 import Tag from "./pages/SignUp/Tag";
 import Bvn from "./pages/SignUp/Bvn";
-import Password from "./pages/SignUp/Password";
+import Password from "./pages/SignUp/password/Password";
 import AccCreate from "./pages/SignUp/AccCreate";
 import LogEmail from "./pages/LogIn/LogEmail";
 import Reset from "./pages/LogIn/Reset";

@@ -7,7 +7,6 @@ import axios from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
 
 const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const REGISTER_URL = "/api/user/signup";
 
@@ -22,7 +21,7 @@ function Email() {
   const [validEmail, setValidEmail] = useState(false);
   //check if the email field is focused
   const [emailFocus, setEmailFocus] = useState(false);
-  const [errMessage, setErrMessage] = useState("mmm");
+  const [errMessage, setErrMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSucessMessage] = useState("");
 
@@ -33,9 +32,6 @@ function Email() {
   //check the entered email against the REGEX
   useEffect(() => {
     const result = EMAIL_REGEX.test(email);
-    console.log(result);
-    console.log(email);
-
     setValidEmail(result);
   }, [email]);
 
@@ -59,27 +55,24 @@ function Email() {
         JSON.stringify({ email }),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: false,
+          // withCredentials: false,
         }
       );
 
       setLoading(false);
       setEmail("");
 
-      if (response.ok) {
-        navigate("/verify");
+      if (response.data.data.token && response.status === 200) {
+        console.log(response.data);
+        navigate("/verify", { state: { email: email } });
         setSucessMessage(
           "An OTP has been sent to your email, Copy and paste the 6 digits number below"
         );
       }
-
-      console.log(response?.data);
-      console.log(response?.accessToken);
-      console.log(JSON.stringify(response));
     } catch (error) {
-      if (!error?.response) {
+      if (error.response) {
         setErrMessage("No Server Response");
-      } else if (error.response?.status === 409) {
+      } else if (error.response.status === 400) {
         setErrMessage("Email Taken");
       } else {
         setErrMessage("Registration Failed");
@@ -160,7 +153,7 @@ function Email() {
       </button>
 
       {loading && <h1>Loadingggggg</h1>}
-      <h1>{successMessage}</h1>
+      <h1>{errMessage}</h1>
     </div>
   );
 }
