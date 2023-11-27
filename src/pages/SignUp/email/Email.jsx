@@ -59,16 +59,14 @@ function Email() {
         JSON.stringify({ email }),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: false,
         }
       );
-
+      console.log("here");
+      navigate("/verify", {
+        state: { email, otpCode: response.data.data.token },
+      });
       setLoading(false);
       setEmail("");
-
-      if (response.ok) {
-        navigate("/verify");
-      }
 
       console.log(response?.data);
       console.log(response?.accessToken);

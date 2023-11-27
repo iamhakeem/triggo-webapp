@@ -10,6 +10,7 @@ import AccCreate from "./pages/SignUp/AccCreate";
 import LogEmail from "./pages/LogIn/LogEmail";
 import Reset from "./pages/LogIn/Reset";
 import Preset from "./pages/LogIn/Preset";
+import User from "./pages/SignUp/User";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/accCreate" element={<AccCreate />} />
             <Route path="/reset" element={<Reset />} />
             <Route path="/preset" element={<Preset />} />
+            <Route path="/user" element={<User />} />
           </Routes>
         </Router>
       </>
