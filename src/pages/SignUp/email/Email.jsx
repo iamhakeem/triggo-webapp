@@ -68,9 +68,6 @@ function Email() {
 
       if (response.ok) {
         navigate("/verify");
-        setSucessMessage(
-          "An OTP has been sent to your email, Copy and paste the 6 digits number below"
-        );
       }
 
       console.log(response?.data);
