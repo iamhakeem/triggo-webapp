@@ -12,6 +12,7 @@ import Reset from "./pages/LogIn/Reset";
 import Preset from "./pages/LogIn/Preset";
 import Dashboard from "./pages/Dashboard/dashboard";
 import Settings from "./pages/Dashboard/Settings";
+import UserProfile from "./pages/userProfile/UserProfile";
 
 function App() {
   return (
@@ -30,8 +31,9 @@ function App() {
             <Route path="/accCreate" element={<AccCreate />} />
             <Route path="/reset" element={<Reset />} />
             <Route path="/preset" element={<Preset />} />
-               <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/settings' element={<Settings />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/user" element={<UserProfile />} />
           </Routes>
         </Router>
       </>

@@ -33,9 +33,7 @@ function Password() {
     const v1 = PWD_REGEX.test(pwd);
 
     if (!v1) {
-      invalidTimeout = setTimeout(() => {
-        setErrMessage("Invalid Entry");
-      });
+      setErrMessage("Invalid Entry");
     }
 
     if (validPwd && validMatch) {

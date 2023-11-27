@@ -63,16 +63,19 @@ function Email() {
       setEmail("");
 
       if (response.data.data.token && response.status === 200) {
-        console.log(response.data);
-        navigate("/verify", { state: { email: email } });
-        setSucessMessage(
-          "An OTP has been sent to your email, Copy and paste the 6 digits number below"
-        );
+        console.log(response.data.data.token);
+        localStorage.setItem("token", response.data.data.token);
+        navigate("/verify", {
+          state: { email: email, token: response.data.data.token },
+        });
       }
-    } catch (error) {
-      if (error.response) {
+    } catch (err) {
+      console.log(err.response.data.message);
+      console.log(err.response.status);
+      if (!err?.response) {
         setErrMessage("No Server Response");
-      } else if (error.response.status === 400) {
+      }
+      if (err.response?.message === "User exist, Proceed to the Login Page!") {
         setErrMessage("Email Taken");
       } else {
         setErrMessage("Registration Failed");
@@ -89,9 +92,9 @@ function Email() {
       <p className="my-3 text-slate-600">
         Your email address will be used to verify your account.
       </p>
-      <form onSubmit={onSubmitEmail}>
+      <form>
         <label htmlFor="email">
-          Email Address:{" "}
+          Email Address:
           <span className={validEmail ? " valid " : "hide"}>
             <FaCheck className="email_icon_check" />
           </span>
@@ -138,14 +141,14 @@ function Email() {
       </div>
       <p
         ref={errRef}
-        className={errMessage ? "errmsg" : "offscreen"}
+        className={errMessage ? "errmsg" : ""}
         aria-live="assertive"
       >
         {errMessage}
       </p>
       <button
+        type="submit"
         onClick={onSubmitEmail}
-        type="button"
         disabled={!validEmail || !email ? true : false}
         className=" w-10/12 font-semibold text-center bg-[#00DC8A] rounded-full p-3 absolute bottom-0 "
       >

@@ -10,9 +10,16 @@ function Verify() {
 
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
+  const [resToken, setResToken] = useState("");
 
   useEffect(() => {
-    setEmail(location.state.email);
+    if (!location?.state?.token) {
+      navigate("/");
+    }
+    setEmail(location.state?.email);
+    setResToken(location.state?.token);
+
+    console.log(resToken);
   }, [location]);
 
   const handleTokenSubmit = async (e) => {
@@ -29,7 +36,7 @@ function Verify() {
       );
 
       if (response.data.status === 200) {
-        navigate("/password");
+        navigate("/user", { state: { token: resToken } });
       }
 
       setToken("");

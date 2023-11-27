@@ -1,8 +1,15 @@
 import React from "react";
 import world from "../../assets/World.png";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AccCreate() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/dashboard");
+  }),
+    [];
   return (
     <>
       <div className="flex justify-center">
