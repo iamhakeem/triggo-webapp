@@ -9,6 +9,7 @@ function LogEmail() {
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  const [token, setToken] = useState("");
 
   const emailRef = useRef();
   const errRef = useRef();
